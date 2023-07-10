@@ -8,12 +8,18 @@ public class Collectable : MonoBehaviour
     #region Properties
     [SerializeField]
     float spinSpeed = 5f;
+    [SerializeField]
+    float spincrease = 5f;
 
     public float bounceMagnitude = 0.5f;
     public float bounceFrequency = 1f;
 
     [SerializeField]
     GameObject graphics;
+    [SerializeField]
+    GameObject particles;
+
+    IEnumerator spinner;
     #endregion
 
     #region Setup
@@ -30,15 +36,51 @@ public class Collectable : MonoBehaviour
 
     #region Functions
     private void SpinAndHover()
-    {
-        //graphics.transform.rotation = Quaternion.Euler(transform.rotation.x,
-        //                                                  transform.rotation.y + spinSpeed * Time.deltaTime,
-        //                                                  transform.rotation.z);
-
+    {                                     
         graphics.transform.Rotate(0f, spinSpeed * Time.deltaTime, 0f);
 
         // Hover
         graphics.transform.position = graphics.transform.position + Vector3.up * Mathf.Sin(Time.time * bounceFrequency) * bounceMagnitude;
+    }
+    #endregion
+
+    #region Collision
+    private void OnTriggerEnter(Collider other)
+    {
+        GetPickedUp();
+    }
+
+    private void GetPickedUp()
+    {
+        if (spinner == null)
+        {
+            spinner = EndSpinner();
+            StartCoroutine(spinner);
+        }
+    }
+
+    IEnumerator EndSpinner()
+    {
+        float increment = 0.1f;
+        float time = 0f;
+        float timeLimit = 3f;
+        WaitForSeconds wait = new WaitForSeconds(increment);
+
+        while (time < timeLimit)
+        {
+            time += increment;
+
+            //spinSpeed += (spincrease);
+            spinSpeed *= spincrease;
+
+            yield return wait;
+        }
+
+        GameObject partic = Instantiate(particles) as GameObject;
+        partic.transform.position = transform.position;
+        Destroy(partic, 5f);
+
+        Destroy(gameObject);
     }
     #endregion
 }
