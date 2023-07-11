@@ -28,6 +28,12 @@ public class Ingredient : MonoBehaviour
         // Setup graphics
         graphics = GetComponentInChildren<IngredientGraphicsController>();
         graphics.SetupIngredientGraphics(type);
+
+        // Check for Milk
+        if (type == Type.milk)
+        {
+            StartMilkAging();
+        }
     }
     #endregion
 
@@ -125,20 +131,18 @@ public class Ingredient : MonoBehaviour
 
         yield return wait;
 
-        GetMixed();
-
-        // Change type
-        type = newType;
-        graphics.ChangeIngredientGraphics(newType);
-
-
+        GetMixed(newType);
+        
         mixingInProcess = false;
     }
 
-    private void GetMixed()
+    private void GetMixed(Type newType)
     {
         // Spawn particles
         graphics.SpawnParticles(type);
+
+        type = newType;
+        graphics.ChangeIngredientGraphics(newType);
     }
 
     public void GetMixedAndDestroyed()
@@ -150,6 +154,35 @@ public class Ingredient : MonoBehaviour
 
         // Destroy itself
         Destroy(gameObject);
+    }
+    #endregion
+
+    #region Milk
+    public void StartMilkAging()
+    {
+        StartCoroutine(MilkAgeTimer());
+    }
+
+    IEnumerator MilkAgeTimer()
+    {
+        float increment = 0.1f;
+        WaitForSeconds wait = new WaitForSeconds(increment);
+
+        float milkToCheeseTime = 2f;
+        float waitedTime = 0f;
+
+        while (waitedTime < milkToCheeseTime)
+        {
+            waitedTime += increment;
+
+            // Speed up spinning
+            //graphics.currentSpinSpeed *= 1.5f;
+
+            yield return wait;
+        }
+
+        // Turn to milk
+        GetMixed(Type.cheese);
     }
     #endregion
 }

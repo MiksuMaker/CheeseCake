@@ -9,7 +9,8 @@ public class IngredientGraphicsController : MonoBehaviour
     protected float idleSpinSpeed = 10f;
     [SerializeField]
     protected float touchSpinSpeed = 50f;
-    float currentSpinSpeed;
+    [HideInInspector]
+    public float currentSpinSpeed;
 
     public float bounceMagnitude = 0.005f;
     public float bounceFrequency = 5f;
