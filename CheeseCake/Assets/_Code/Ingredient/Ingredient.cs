@@ -78,8 +78,6 @@ public class Ingredient : MonoBehaviour
 
             HandleIngredientMixing(other);
 
-            // Destroy the other
-            other.GetMixed();
         }
     }
     #endregion
@@ -93,21 +91,22 @@ public class Ingredient : MonoBehaviour
         {
             case (Type.egg, Type.flour):
                 StartCoroutine(Mix(Type.cake));
+                other.GetMixedAndDestroyed();
                 break;
             // ==============
             case (Type.flour, Type.egg):
                 StartCoroutine(Mix(Type.cake));
-
+                other.GetMixedAndDestroyed();
                 break;
             // ==============
             case (Type.cheese, Type.cake):
                 StartCoroutine(Mix(Type.cheeseCake));
-
+                other.GetMixedAndDestroyed();
                 break;
             // ==============
             case (Type.cake, Type.cheese):
                 StartCoroutine(Mix(Type.cheeseCake));
-
+                other.GetMixedAndDestroyed();
                 break;
             // ==============
             default:
@@ -118,11 +117,13 @@ public class Ingredient : MonoBehaviour
 
     IEnumerator Mix(Type newType)
     {
-        WaitForSeconds wait = new WaitForSeconds(0.5f);
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
 
         mixingInProcess = true;
 
         yield return wait;
+
+        GetMixed();
 
         // Change type
         type = newType;
@@ -132,11 +133,18 @@ public class Ingredient : MonoBehaviour
         mixingInProcess = false;
     }
 
-    public void GetMixed()
+    private void GetMixed()
+    {
+        // Spawn particles
+        graphics.SpawnParticles(type);
+    }
+
+    public void GetMixedAndDestroyed()
     {
         if (mixingInProcess) { return; }
 
         // Do the UI particles
+        graphics.SpawnParticles(type);
 
         // Destroy itself
         Destroy(gameObject);

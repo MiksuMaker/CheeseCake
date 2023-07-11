@@ -48,37 +48,44 @@ public class IngredientGraphicsController : MonoBehaviour
 
     private void SetupCorrectGraphics(Ingredient.Type type)
     {
+        string path = GetCorrectString(type);
+
+        graphics = Instantiate(Resources.Load(path + " Graphics"), transform) as GameObject;
+    }
+
+    private string GetCorrectString(Ingredient.Type type)
+    {
         string path = "";
 
         switch (type)
         {
             case Ingredient.Type.milk:
-                path = "Milk Graphics";
+                path = "Milk";
                 break;
             //======================
             case Ingredient.Type.egg:
-                path = "Egg Graphics";
+                path = "Egg";
                 break;
             //======================
             case Ingredient.Type.flour:
-                path = "Flours Graphics";
+                path = "Flours";
                 break;
             //======================
             case Ingredient.Type.cake:
-                path = "Cake Graphics";
+                path = "Cake";
                 break;
             //======================
             case Ingredient.Type.cheese:
-                path = "Cheese Graphics";
+                path = "Cheese";
                 break;
             //======================
             case Ingredient.Type.cheeseCake:
-                path = "CheeseCake Graphics";
+                path = "CheeseCake";
                 break;
                 //======================
         }
 
-        graphics = Instantiate(Resources.Load(path), transform) as GameObject;
+        return path;
     }
 
 
@@ -118,4 +125,17 @@ public class IngredientGraphicsController : MonoBehaviour
         }
     }
     #endregion
+
+    public void SpawnParticles(Ingredient.Type type)
+    {
+        string path = GetCorrectString(type) + " Particles";
+
+        GameObject p = Instantiate(Resources.Load(path)) as GameObject;
+        
+        // Move
+        p.transform.position = transform.position;
+
+        // Set it to destroy itself
+        Destroy(p, 10f);
+    }
 }
