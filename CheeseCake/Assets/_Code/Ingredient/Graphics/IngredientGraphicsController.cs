@@ -11,8 +11,8 @@ public class IngredientGraphicsController : MonoBehaviour
     protected float touchSpinSpeed = 50f;
     float currentSpinSpeed;
 
-    public float bounceMagnitude = 0.5f;
-    public float bounceFrequency = 1f;
+    public float bounceMagnitude = 0.005f;
+    public float bounceFrequency = 5f;
 
     [SerializeField]
     protected GameObject graphics;
@@ -37,6 +37,15 @@ public class IngredientGraphicsController : MonoBehaviour
         StartCoroutine(graphicsUpdateLoop);
     }
 
+    public void ChangeIngredientGraphics(Ingredient.Type type)
+    {
+        // Destory previous graphics
+        Destroy(transform.GetChild(0).gameObject);
+
+        // Start up new graphics
+        SetupCorrectGraphics(type);
+    }
+
     private void SetupCorrectGraphics(Ingredient.Type type)
     {
         string path = "";
@@ -52,7 +61,7 @@ public class IngredientGraphicsController : MonoBehaviour
                 break;
             //======================
             case Ingredient.Type.flour:
-                path = "Flour Graphics";
+                path = "Flours Graphics";
                 break;
             //======================
             case Ingredient.Type.cake:
