@@ -7,37 +7,33 @@ public class Collectable : MonoBehaviour
 
     #region Properties
     [SerializeField]
-    float spinTimeBeforeDestruction = 2f;
+    protected float spinTimeBeforeDestruction = 2f;
     [SerializeField]
-    float spinSpeed = 5f;
+    protected float spinSpeed = 5f;
     [SerializeField]
-    float spincrease = 5f;
+    protected float spincrease = 5f;
 
     public float bounceMagnitude = 0.5f;
     public float bounceFrequency = 1f;
 
     [SerializeField]
-    GameObject graphics;
+    protected GameObject graphics;
     [SerializeField]
-    GameObject particles;
+    protected GameObject particles;
 
-    IEnumerator spinner;
+    protected IEnumerator spinner;
     #endregion
 
     #region Setup
-    private void Start()
-    {
-        
-    }
 
-    private void Update()
+    protected void Update()
     {
         SpinAndHover();
     }
     #endregion
 
     #region Functions
-    private void SpinAndHover()
+    protected virtual void SpinAndHover()
     {                                     
         graphics.transform.Rotate(0f, spinSpeed * Time.deltaTime, 0f);
 
@@ -47,12 +43,12 @@ public class Collectable : MonoBehaviour
     #endregion
 
     #region Collision
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         GetPickedUp();
     }
 
-    private void GetPickedUp()
+    protected virtual void GetPickedUp()
     {
         if (spinner == null)
         {
@@ -63,7 +59,7 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    IEnumerator EndSpinner()
+    protected virtual IEnumerator EndSpinner()
     {
         float increment = 0.1f;
         float time = 0f;

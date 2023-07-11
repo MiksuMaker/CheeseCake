@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f9744df2968ab4395667ae322860dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinTimeBeforeDestruction: 2
   spinSpeed: 50
   spincrease: 1.2
   bounceMagnitude: 0.005
@@ -94,7 +95,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920423834237372041, guid: acb9d61177cc5bd4d86af739da8517ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5920423834237372041, guid: acb9d61177cc5bd4d86af739da8517ab, type: 3}
       propertyPath: m_LocalPosition.z
