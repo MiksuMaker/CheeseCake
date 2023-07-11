@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fc7425fea093345925f5f888da6cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 5
+  spinSpeed: 50
   spincrease: 5
   bounceMagnitude: 0.005
   bounceFrequency: 5
@@ -861,6 +861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milk Graphics
       objectReference: {fileID: 0}
+    - target: {fileID: 8779889754080301699, guid: acb9d61177cc5bd4d86af739da8517ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acb9d61177cc5bd4d86af739da8517ab, type: 3}
 --- !u!4 &1545179531 stripped
@@ -879,6 +883,7 @@ GameObject:
   - component: {fileID: 1755712508}
   - component: {fileID: 1755712510}
   - component: {fileID: 1755712509}
+  - component: {fileID: 1755712511}
   m_Layer: 0
   m_Name: Ingredient
   m_TagString: Untagged
@@ -931,6 +936,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1755712511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755712507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54516ba5e5f1fe847b1af352464d371b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &2002309940
 GameObject:
   m_ObjectHideFlags: 0
