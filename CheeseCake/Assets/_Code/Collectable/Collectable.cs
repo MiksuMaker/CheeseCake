@@ -7,6 +7,8 @@ public class Collectable : MonoBehaviour
 
     #region Properties
     [SerializeField]
+    float spinTimeBeforeDestruction = 2f;
+    [SerializeField]
     float spinSpeed = 5f;
     [SerializeField]
     float spincrease = 5f;
@@ -54,6 +56,8 @@ public class Collectable : MonoBehaviour
     {
         if (spinner == null)
         {
+            bounceMagnitude = 0f;
+
             spinner = EndSpinner();
             StartCoroutine(spinner);
         }
@@ -63,7 +67,7 @@ public class Collectable : MonoBehaviour
     {
         float increment = 0.1f;
         float time = 0f;
-        float timeLimit = 3f;
+        float timeLimit = spinTimeBeforeDestruction;
         WaitForSeconds wait = new WaitForSeconds(increment);
 
         while (time < timeLimit)
