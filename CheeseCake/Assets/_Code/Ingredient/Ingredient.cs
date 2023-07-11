@@ -21,8 +21,10 @@ public class Ingredient : MonoBehaviour
     #endregion
 
     #region Setup
-    private void Start()
+    public void SetupIngredient(Type _type)
     {
+        type = _type;
+
         // Setup graphics
         graphics = GetComponentInChildren<IngredientGraphicsController>();
         graphics.SetupIngredientGraphics(type);
